@@ -1,0 +1,36 @@
+package net.fly;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class CommandFly implements CommandExecutor{
+
+ @Override
+ public boolean onCommand(CommandSender sender, Command cmd, String label,
+   String[] arg3) {
+  Player player = (Player)sender;
+  String message_on = "You are now flying";
+  String message_off = "You are no longer flying";
+  
+  if(arg3[0].equalsIgnoreCase("on")) {
+   player.setAllowFlight(true);
+   player.sendMessage(message_on);
+   return true;
+  }else if (arg3[0].equalsIgnoreCase("off")) {
+   player.setAllowFlight(false);
+   player.sendMessage(message_off);
+   player.addPotionEffects(null);
+   player.setFlySpeed(230);
+   return true;
+  }
+   
+  player.setAllowFlight(true);
+  player.sendMessage(message_on);
+  player.addPotionEffects(null);
+  player.setFlySpeed(0);
+  return false;
+ }
+
+}
